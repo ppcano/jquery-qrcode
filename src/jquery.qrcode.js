@@ -3,17 +3,12 @@
 		// if options is string, 
 		if( typeof options === 'string' ){
 			options	= { text: options };
-		};
-		
-		var supportCanvas	= function() {
-			var element	= document.createElement('canvas');
-			return !!(element.getContext && element.getContext('2d'));
-		};
+		}
 
 		// set default values
 		// typeNumber < 1 for automatic calculation
 		options	= $.extend( {}, {
-			render		: supportCanvas() ? "canvas" : "table",
+			render		: "canvas",
 			width		: 256,
 			height		: 256,
 			typeNumber	: -1,
@@ -62,9 +57,10 @@
 				.css("border-collapse", "collapse")
 				.css('background-color', "#ffffff");
 		  
-			// compute tileW/tileH
-			var tileW	= options.width  / qrcode.getModuleCount();
+			// compute tileS percentage
+			var tileW	= options.width / qrcode.getModuleCount();
 			var tileH	= options.height / qrcode.getModuleCount();
+
 			// draw in the table
 			for(var row = 0; row < qrcode.getModuleCount(); row++ ){
 				var $row = $('<tr></tr>').css('height', tileH+"px").appendTo($table);
